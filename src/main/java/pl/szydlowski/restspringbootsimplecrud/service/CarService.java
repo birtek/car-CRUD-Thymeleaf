@@ -3,12 +3,21 @@ package pl.szydlowski.restspringbootsimplecrud.service;
 import pl.szydlowski.restspringbootsimplecrud.model.Car;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CarService {
 
   List<Car> getCars();
 
-  Car getCarByid(long id);
+  Optional<Car> getCarById(long id);
 
-  Car getCarByColor(String color);
+  List<Car> getCarsByColor(String color);
+
+  Car addCar(Car car);
+
+  Car updateCar(Car car);
+
+  Car modifyCarField(long id, Car modifyCar);
+
+  List<Car>removeCar(Car car);
 }
