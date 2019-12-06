@@ -1,10 +1,7 @@
 package pl.szydlowski.restspringbootsimplecrud.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.szydlowski.restspringbootsimplecrud.model.Car;
 import pl.szydlowski.restspringbootsimplecrud.service.CarService;
 
@@ -15,16 +12,15 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @RestController
 @RequestMapping(value = "/cars")
-public class CarController {
+public class CarAPI {
 
     private CarService carService;
 
     @Autowired
-    public CarController(CarService carService) {
+    public CarAPI(CarService carService) {
         this.carService = carService;
     }
 
@@ -47,6 +43,12 @@ public class CarController {
     public ResponseEntity<Optional<Car>> getCarById(@PathVariable long id){
         Optional<Car> car = carService.getCarById(id);
         return new ResponseEntity<>(car, HttpStatus.OK);
+    }
 
+    @PostMapping
+    public boolean addCar(Car car){
+       //List<Car> carList = carService.addCar(car);
+       //return new ResponseEntity<>(carList,HttpStatus.OK);
+        return false;
     }
 }

@@ -10,11 +10,18 @@ public enum Color {
 
     private String displayColor;
 
-    Color(String dispalyColor){
-        this.displayColor = dispalyColor;
+    Color(String displayColor){
+        this.displayColor = displayColor;
     }
 
     public String getDisplayColor(){
         return displayColor;
+    }
+
+    @Override
+    public String toString() {
+        return "Color{" +
+                "displayColor='" + displayColor + '\'' +
+                '}';
     }
 }

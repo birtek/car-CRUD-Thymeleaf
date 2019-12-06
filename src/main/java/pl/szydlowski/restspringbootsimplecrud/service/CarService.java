@@ -7,17 +7,21 @@ import java.util.Optional;
 
 public interface CarService {
 
-  List<Car> getCars();
+    List<Car> getCars();
 
-  Optional<Car> getCarById(long id);
+    Optional<Car> getCarById(long id);
 
-  List<Car> getCarsByColor(String color);
+    List<Car> getCarsByColor(String color);
 
-  Car addCar(Car car);
+    boolean addCar(Car car);
 
-  Car updateCar(Car car);
+    boolean updateCar(Car car);
 
-  Car modifyCarField(long id, Car modifyCar);
+    boolean modifiedCarMark(long id, String mark);
 
-  List<Car>removeCar(Car car);
+    boolean modifiedCarModel(long id, String model);
+
+    boolean modifyCarColor(long id, String color);
+
+    boolean removeCar(long id);
 }

@@ -54,7 +54,7 @@ public class Car {
                 "id=" + id +
                 ", mark='" + mark + '\'' +
                 ", model='" + model + '\'' +
-                ", color='" + color + '\'' +
+                ", color='" + color.getDisplayColor().toLowerCase() + '\'' +
                 '}';
     }
 }
