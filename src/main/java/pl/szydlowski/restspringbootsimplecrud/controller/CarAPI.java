@@ -1,7 +1,6 @@
 package pl.szydlowski.restspringbootsimplecrud.controller;
 
-import com.sun.org.apache.regexp.internal.RE;
-import com.sun.tracing.dtrace.ProviderAttributes;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.szydlowski.restspringbootsimplecrud.model.Car;
