@@ -1,5 +1,7 @@
 package pl.szydlowski.restspringbootsimplecrud.controller;
 
+import com.sun.org.apache.regexp.internal.RE;
+import com.sun.tracing.dtrace.ProviderAttributes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.szydlowski.restspringbootsimplecrud.model.Car;
@@ -46,9 +48,51 @@ public class CarAPI {
     }
 
     @PostMapping
-    public boolean addCar(Car car){
-       //List<Car> carList = carService.addCar(car);
-       //return new ResponseEntity<>(carList,HttpStatus.OK);
-        return false;
+    public ResponseEntity<Boolean> addCar(Car car){
+        if(carService.addCar(car)){
+            return new ResponseEntity(HttpStatus.CREATED);
+        }
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @PutMapping
+    public ResponseEntity<Boolean> updateCar(@RequestBody Car car){
+        if(carService.updateCar(car)){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @PutMapping("/{id}/{mark}")
+    public ResponseEntity<Boolean> updateCarMark(@PathVariable long id, @PathVariable String mark){
+        if(carService.modifiedCarMark(id,mark)){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @PutMapping("/{id}/{model}")
+    public ResponseEntity<Boolean> updateCarModel(@PathVariable long id, @PathVariable String model){
+        if(carService.modifiedCarModel(id,model)){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @PutMapping("/{id}/{color}")
+    public ResponseEntity<Boolean> updateCarColor(@PathVariable long id, @PathVariable String color){
+        if(carService.modifyCarColor(id,color)){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> removeCar(@PathVariable long id){
+        if(carService.removeCar(id)){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
 }
