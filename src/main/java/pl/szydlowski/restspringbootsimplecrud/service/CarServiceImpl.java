@@ -100,7 +100,7 @@ public class CarServiceImpl implements CarService {
     @Override
     public boolean removeCar(long id) {
         Optional<Car> found = getCarById(id);
-        if(found.isPresent()) {
+        if (found.isPresent()) {
             Car car = found.get();
             return carList.remove(car);
         }
