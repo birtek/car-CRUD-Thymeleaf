@@ -8,6 +8,7 @@ import pl.szydlowski.restspringbootsimplecrud.model.Color;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -65,34 +66,40 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public boolean modifiedCarMark(long id, String mark) {
+    public boolean modifiedCarMark(long id, Map<String, Object> updates) {
         Optional<Car> found = getCarById(id);
         if (found.isPresent()) {
             Car car = found.get();
-            car.setMark(mark);
-            return true;
+            if (updates.containsKey("mark")) {
+                car.setMark((String) updates.get("mark"));
+                return true;
+            }
         }
         return false;
     }
 
     @Override
-    public boolean modifiedCarModel(long id, String model) {
+    public boolean modifiedCarModel(long id, Map<String, Object> updates) {
         Optional<Car> found = getCarById(id);
         if (found.isPresent()) {
             Car car = found.get();
-            car.setModel(model);
-            return true;
+            if (updates.containsKey("model")) {
+                car.setModel((String) updates.get("model"));
+                return true;
+            }
         }
         return false;
     }
 
     @Override
-    public boolean modifyCarColor(long id, String color) {
+    public boolean modifyCarColor(long id, Map<String, String> updates) {
         Optional<Car> found = getCarById(id);
         if (found.isPresent()) {
             Car car = found.get();
-            car.setColor(Color.valueOf(color));
-            return true;
+            if (updates.containsKey("color")) {
+                car.setColor(Color.valueOf(updates.get("color")));
+                return true;
+            }
         }
         return false;
     }
@@ -106,5 +113,6 @@ public class CarServiceImpl implements CarService {
         }
         return false;
     }
+
 
 }

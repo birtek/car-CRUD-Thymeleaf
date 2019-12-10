@@ -3,6 +3,7 @@ package pl.szydlowski.restspringbootsimplecrud.service;
 import pl.szydlowski.restspringbootsimplecrud.model.Car;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface CarService {
@@ -17,11 +18,13 @@ public interface CarService {
 
     boolean updateCar(Car car);
 
-    boolean modifiedCarMark(long id, String mark);
+    boolean modifiedCarMark(long id, Map<String, Object> updates);
 
-    boolean modifiedCarModel(long id, String model);
+    boolean modifiedCarModel(long id, Map<String, Object> updates);
 
-    boolean modifyCarColor(long id, String color);
+    boolean modifyCarColor(long id, Map<String, String> updates);
 
     boolean removeCar(long id);
+
+
 }

@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -58,30 +59,30 @@ public class CarAPI {
     @PutMapping
     public ResponseEntity<Boolean> updateCar(@RequestBody Car car) {
         if (carService.updateCar(car)) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @PatchMapping("/{id}/mark")
+    public ResponseEntity<Boolean> updateCarMark(@PathVariable long id, @RequestBody Map<String, Object> updates) {
+        if (carService.modifiedCarMark(id, updates)) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @PatchMapping("/{id}/model")
+    public ResponseEntity<Boolean> updateCarModel(@PathVariable long id, @RequestBody Map<String, Object> updates) {
+        if (carService.modifiedCarModel(id, updates)) {
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @PutMapping("/{id}/{mark}")
-    public ResponseEntity<Boolean> updateCarMark(@PathVariable long id, @PathVariable String mark) {
-        if (carService.modifiedCarMark(id, mark)) {
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
-    @PutMapping("/{id}/{model}")
-    public ResponseEntity<Boolean> updateCarModel(@PathVariable long id, @PathVariable String model) {
-        if (carService.modifiedCarModel(id, model)) {
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
-    @PutMapping("/{id}/{color}")
-    public ResponseEntity<Boolean> updateCarColor(@PathVariable long id, @PathVariable String color) {
-        if (carService.modifyCarColor(id, color)) {
+    @PatchMapping("/{id}/color")
+    public ResponseEntity<Boolean> updateCarColor(@PathVariable long id, @RequestBody Map<String, String> updates) {
+        if (carService.modifyCarColor(id, updates)) {
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -94,5 +95,7 @@ public class CarAPI {
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
+
+
 
 }
