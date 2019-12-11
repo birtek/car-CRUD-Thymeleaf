@@ -1,7 +1,7 @@
 package pl.szydlowski.restspringbootsimplecrud.service;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import pl.szydlowski.restspringbootsimplecrud.model.Car;
 import pl.szydlowski.restspringbootsimplecrud.model.Color;
@@ -38,8 +38,12 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public Optional<Car> getCarById(long id) {
-        return carList.stream().filter(car -> car.getId() == id).findFirst();
+    public Car getCarById(long id) {
+        Optional<Car> found = carList.stream().filter(car -> car.getId() == id).findFirst();
+        if (found.isPresent()) {
+            return found.get();
+        }
+        return null;
     }
 
     @Override
@@ -67,11 +71,10 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public boolean modifiedCarMark(long id, Map<String, Object> updates) {
-        Optional<Car> found = getCarById(id);
-        if (found.isPresent()) {
-            Car car = found.get();
+        Car found = getCarById(id);
+        if (found != null) {
             if (updates.containsKey("mark")) {
-                car.setMark((String) updates.get("mark"));
+                found.setMark((String) updates.get("mark"));
                 return true;
             }
         }
@@ -80,11 +83,10 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public boolean modifiedCarModel(long id, Map<String, Object> updates) {
-        Optional<Car> found = getCarById(id);
-        if (found.isPresent()) {
-            Car car = found.get();
+        Car found = getCarById(id);
+        if (found != null) {
             if (updates.containsKey("model")) {
-                car.setModel((String) updates.get("model"));
+                found.setModel((String) updates.get("model"));
                 return true;
             }
         }
@@ -93,11 +95,10 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public boolean modifyCarColor(long id, Map<String, String> updates) {
-        Optional<Car> found = getCarById(id);
-        if (found.isPresent()) {
-            Car car = found.get();
+        Car found = getCarById(id);
+        if (found != null) {
             if (updates.containsKey("color")) {
-                car.setColor(Color.valueOf(updates.get("color")));
+                found.setColor(Color.valueOf(updates.get("color")));
                 return true;
             }
         }
@@ -106,13 +107,10 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public boolean removeCar(long id) {
-        Optional<Car> found = getCarById(id);
-        if (found.isPresent()) {
-            Car car = found.get();
-            return carList.remove(car);
+        Car found = getCarById(id);
+        if (found != null) {
+            return carList.remove(found);
         }
         return false;
     }
-
-
 }

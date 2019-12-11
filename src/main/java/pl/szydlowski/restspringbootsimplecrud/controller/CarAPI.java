@@ -16,7 +16,7 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping(value = "/cars")
+@RequestMapping(value = "/cars-list")
 public class CarAPI {
 
     private CarService carService;
@@ -42,10 +42,12 @@ public class CarAPI {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Car>> getCarById(@PathVariable long id) {
-        Optional<Car> car = carService.getCarById(id);
-        return car.map(car1 -> new ResponseEntity<>(car, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    public ResponseEntity<Car> getCarById(@PathVariable long id) {
+        Car found = carService.getCarById(id);
+        if (found != null) {
+            return new ResponseEntity<>(found, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping
@@ -75,7 +77,7 @@ public class CarAPI {
     @PatchMapping("/{id}/model")
     public ResponseEntity<Boolean> updateCarModel(@PathVariable long id, @RequestBody Map<String, Object> updates) {
         if (carService.modifiedCarModel(id, updates)) {
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -83,7 +85,7 @@ public class CarAPI {
     @PatchMapping("/{id}/color")
     public ResponseEntity<Boolean> updateCarColor(@PathVariable long id, @RequestBody Map<String, String> updates) {
         if (carService.modifyCarColor(id, updates)) {
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -96,6 +98,11 @@ public class CarAPI {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-
+//    @GetMapping("/{id}")
+//    public ResponseEntity<Optional<Car>> getCarById(@PathVariable long id) {
+//        Optional<Car> car = carService.getCarById(id);
+//        return car.map(car1 -> new ResponseEntity<>(car, HttpStatus.OK))
+//                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+//    }
 
 }

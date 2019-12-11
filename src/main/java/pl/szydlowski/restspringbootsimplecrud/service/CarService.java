@@ -10,7 +10,7 @@ public interface CarService {
 
     List<Car> getCars();
 
-    Optional<Car> getCarById(long id);
+    Car getCarById(long id);
 
     List<Car> getCarsByColor(String color);
 
@@ -25,6 +25,8 @@ public interface CarService {
     boolean modifyCarColor(long id, Map<String, String> updates);
 
     boolean removeCar(long id);
+
+
 
 
 }

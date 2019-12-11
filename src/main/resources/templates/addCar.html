@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Mark</th>
+        <th>Model</th>
+        <th>Color</th>
+    </tr>
+    <tr th:each="car:${cars}">
+        <td th:text="${car.getId()}"></td>
+        <td th:text="${car.getMark()}"></td>
+        <td th:text="${car.getModel()}"></td>
+        <td th:text="${car.getColor().displayColor}"></td>
+        <td><a th:href="@{/updateCar/{id}(id=${car.id})}">edit</a></td>
+        <td><a th:href="@{/deleteCar/{id}(id=${car.id})}">delete</a></td>
+    </tr>
+</table>
+
+<form th:action="@{/add-car}" th:object="${newCar}" method="post">
+    <p>ID: <input type="text" th:field="*{id}"></p>
+    <p>Mark: <input type="text" th:field="*{mark}"></p>
+    <p>Mark: <input type="text" th:field="*{model}"></p>
+    <p>Mark: <input type="text" value="RED" th:field="*{color}"></p>
+    <p><input type="submit" value="add new car"></p>
+</form>
+</body>
+</html>
