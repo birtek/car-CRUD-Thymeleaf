@@ -2,6 +2,6 @@
 
 TODO
 
-Some Database(PostgreSQL or MongoDB)
-WRite some tests
+Some Database(PostgreSQL or MongoDB),
+Wite some tests
 
