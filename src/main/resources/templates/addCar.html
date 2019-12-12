@@ -26,7 +26,7 @@
     <p>ID: <input type="text" th:field="*{id}"></p>
     <p>Mark: <input type="text" th:field="*{mark}"></p>
     <p>Model: <input type="text" th:field="*{model}"></p>
-    <p>Color: <input type="text" value="RED" th:field="*{color}"></p>
+    <p>Color: <input type="text" value="RED" th:field="*{color.name().}"></p>
     <p><input type="submit" value="add new car"></p>
 </form>
 </body>

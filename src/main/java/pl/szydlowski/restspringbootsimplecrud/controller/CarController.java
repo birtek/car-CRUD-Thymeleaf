@@ -32,17 +32,17 @@ public class CarController {
     }
 
     @GetMapping("/cars/{id}")
-    public String getCar(@PathVariable long id, Model model){
+    public String getCar(@PathVariable long id, Model model) {
         Car car = carService.getCarById(id);
-        if (car!=null){
-            model.addAttribute("cars",car);
+        if (car != null) {
+            model.addAttribute("cars", car);
             return "carList";
-        }else
+        } else
             return "emptyList";
     }
 
     @GetMapping("/addCar")
-    public String addCar(Model model){
+    public String addCar(Model model) {
         List<Car> carList = carService.getCars();
         model.addAttribute("cars", carList);
         model.addAttribute("newCar", new Car());
@@ -50,32 +50,31 @@ public class CarController {
     }
 
     @PostMapping("/add-car")
-    public String addCar(@ModelAttribute Car car){
+    public String addCar(@ModelAttribute Car car) {
         carService.addCar(car);
         return "redirect:/addCar";
     }
 
     @GetMapping("updateCar/{id}")
-    public String addCar(@PathVariable long id, Model model){
+    public String addCar(@PathVariable long id, Model model) {
         Car car = carService.getCarById(id);
-        if(car != null){
+        if (car != null) {
             model.addAttribute("carToUpdate", car);
             return "updateCar";
-        }else
+        } else
             return "emptyList";
     }
 
     @PostMapping("update-car/{id}")
-    public String addCar(@PathVariable long id, @Valid Car newCarData, Model model){
-      //carService.findByIdAndUpdate(id, newCarData);
+    public String addCar(@Valid Car newCarData, Model model) {
         carService.updateCar(newCarData);
-        model.addAttribute("cars",carService.getCars());
-      return  "carList";
+        model.addAttribute("cars", carService.getCars());
+        return "carList";
     }
 
     @GetMapping("/deleteCar/{id}")
-    public String removeCar(@PathVariable long id, Model model){
-       Car car = carService.getCarById(id);
+    public String removeCar(@PathVariable long id, Model model) {
+        Car car = carService.getCarById(id);
         if (car != null) {
             carService.removeCar(id);
             model.addAttribute("cars", carService.getCars());

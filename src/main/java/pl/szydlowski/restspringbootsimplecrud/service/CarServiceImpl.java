@@ -37,15 +37,6 @@ public class CarServiceImpl implements CarService {
         return carList;
     }
 
-//    @Override
-//    public Car getCarById(long id) {
-//        Optional<Car> found = carList.stream().filter(car -> car.getId() == id).findFirst();
-//        if (found.isPresent()) {
-//            return found.get();
-//        }
-//        return null;
-//    }
-
     @Override
     public Car getCarById(long id) {
         Optional<Car> found =carList.stream().filter(car -> car.getId() == id).findFirst();

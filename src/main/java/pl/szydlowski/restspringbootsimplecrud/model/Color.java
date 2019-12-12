@@ -20,8 +20,8 @@ public enum Color {
 
     @Override
     public String toString() {
-        return "Color{" +
-                "displayColor='" + displayColor + '\'' +
-                '}';
+        return
+                "displayColor='" + displayColor + '\''
+                ;
     }
 }
