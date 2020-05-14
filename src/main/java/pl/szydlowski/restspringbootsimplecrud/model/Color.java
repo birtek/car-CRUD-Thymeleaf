@@ -2,11 +2,11 @@ package pl.szydlowski.restspringbootsimplecrud.model;
 
 public enum Color {
 
-    BLUE("blue"),
-    WHITE("white"),
-    GRAY("gray"),
-    BLACK("black"),
-    RED("red");
+    BLUE("Blue"),
+    WHITE("White"),
+    GRAY("Gray"),
+    BLACK("Black"),
+    RED("Red");
 
     private String displayColor;
 
@@ -18,10 +18,4 @@ public enum Color {
         return displayColor;
     }
 
-    @Override
-    public String toString() {
-        return
-                "displayColor='" + displayColor + '\''
-                ;
-    }
 }

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>New car</title>
 </head>
 <body>
 <table>
@@ -26,7 +26,10 @@
     <p>ID: <input type="text" th:field="*{id}"></p>
     <p>Mark: <input type="text" th:field="*{mark}"></p>
     <p>Model: <input type="text" th:field="*{model}"></p>
-    <p>Color: <input type="text" value="RED" th:field="*{color.name().}"></p>
+    <select name="color">
+        <option th:each="colorOpt : ${T(pl.szydlowski.restspringbootsimplecrud.model.Color).values()}"
+                th:value="${colorOpt}" th:text="${colorOpt.displayColor}"></option>
+    </select>
     <p><input type="submit" value="add new car"></p>
 </form>
 </body>
