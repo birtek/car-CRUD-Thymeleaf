@@ -1,4 +1,4 @@
-# spring-boot-training
+# Simple Crud Application
 
 TODO
 
